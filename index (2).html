@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Ayoub Chokoud - BUT GEII</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ==================== 1. DESIGN "DARK GREY" ==================== */
+      :root {
+          --bg-color: #1e1e2e;
+          --card-bg: #2a2b3d;
+          --text-main: #e4e5f1;
+          --text-muted: #a5a6c5;
+          --accent: #3b82f6;         /* Bleu Portfolio */
+          --accent-hover: #2563eb;
+          --linkedin: #0077b5;       /* Bleu LinkedIn */
+          --border-color: #3f4055;
+          --shadow: 0 10px 40px rgba(0,0,0,0.4);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+          background-color: var(--bg-color);
+          color: var(--text-main);
+          font-family: 'Open Sans', sans-serif;
+          overflow-x: hidden;
+          overflow-y: auto; /* Permet le scroll sur la page */
+      }
+
+      /* Scrollbar personnalisée */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: var(--bg-color); }
+      ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+      h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; color: var(--text-main); }
+      a { text-decoration: none; color: inherit; cursor: pointer; }
+      p { line-height: 1.6; }
+
+      /* ==================== 2. NAVIGATION ==================== */
+      nav {
+          position: fixed; top: 25px; left: 50%; transform: translateX(-50%);
+          background: rgba(42, 43, 61, 0.95); backdrop-filter: blur(12px);
+          padding: 12px 35px; border-radius: 50px; border: 1px solid var(--border-color);
+          z-index: 1000; display: flex; gap: 25px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-link {
+          font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+          color: var(--text-muted); transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;
+      }
+
+      .nav-link:hover, .nav-link.active {
+          color: #fff; background: var(--accent); transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      }
+
+      /* ==================== 3. SYSTÈME DE PAGES ==================== */
+      .page-section {
+          display: none; min-height: 100vh; width: 100vw;
+          padding-top: 100px; padding-bottom: 50px;
+          animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .page-section.active { display: flex; flex-direction: column; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* ==================== 4. ACCUEIL (SPLIT SCREEN + PDF) ==================== */
+      #home.active { display: block; padding: 0 5%; }
+
+      .hero-split {
+          display: flex; align-items: center; justify-content: space-between;
+          width: 100%; max-width: 1400px; min-height: 80vh;
+          margin: 0 auto; padding-top: 60px;
+      }
+
+      .hero-left { flex: 1; padding-right: 50px; animation: slideRight 0.8s ease-out; }
+      .hero-right { flex: 1; display: flex; flex-direction: column; gap: 25px; align-items: flex-end; animation: slideLeft 0.8s ease-out; }
+
+      @keyframes slideRight { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+      @keyframes slideLeft { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+
+      /* Section PDF Référentiel */
+      .pdf-section {
+          width: 100%; max-width: 1200px; margin: 0 auto 100px auto;
+          text-align: center; animation: fadeIn 1s ease-out;
+      }
+      .pdf-container {
+          width: 100%; height: 800px; border-radius: 20px; overflow: hidden;
+          border: 2px solid var(--border-color); box-shadow: var(--shadow); background: var(--card-bg);
+      }
+      .pdf-frame { width: 100%; height: 100%; border: none; }
+
+      .profile-photo {
+          width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent);
+          object-fit: cover; box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); margin-bottom: 25px;
+      }
+      h1 {
+          font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; line-height: 1.1;
+          background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      }
+      .subtitle {
+          font-size: 1.2rem; color: var(--accent); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px;
+      }
+      .hero-desc {
+          max-width: 500px; font-size: 1rem; color: var(--text-muted); margin-bottom: 30px;
+          border-left: 3px solid var(--accent); padding-left: 20px; text-align: justify;
+      }
+
+      .personal-info-box { display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
+      .info-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
+      .info-item i { color: var(--accent); }
+
+      .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+      .btn-action {
+          padding: 12px 25px; background: var(--accent); color: white; border-radius: 50px;
+          font-weight: 700; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); transition: 0.3s; border: none; font-size: 13px;
+      }
+      .btn-action:hover { transform: translateY(-3px); background: var(--accent-hover); }
+      .btn-secondary {
+          padding: 12px 25px; background: transparent; color: var(--text-main); border: 2px solid var(--border-color); border-radius: 50px;
+          font-weight: 700; transition: 0.3s; font-size: 13px;
+      }
+      .btn-secondary:hover { border-color: var(--text-main); transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+      .btn-linkedin {
+          padding: 12px 25px; background: var(--linkedin); color: white; border-radius: 50px; border: none;
+          font-weight: 700; box-shadow: 0 10px 25px rgba(0, 119, 181, 0.4); transition: 0.3s; font-size: 13px;
+      }
+      .btn-linkedin:hover { transform: translateY(-3px); background: #005e93; }
+
+      .big-status-card {
+          width: 100%; max-width: 450px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+          border-radius: 20px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+      }
+      .big-status-card:hover {
+          transform: scale(1.02); border-color: var(--accent); box-shadow: 0 20px 50px rgba(0,0,0,0.5); background: rgba(255, 255, 255, 0.06);
+      }
+      .big-img-box { width: 100%; height: 200px; background: #fff; display: flex; align-items: center; justify-content: center; padding: 10px; }
+      .big-img-box img { width: 100%; height: 100%; object-fit: cover; }
+      .big-text-box { padding: 20px; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); }
+      .big-title { color: white; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; display: block; margin-bottom: 5px; }
+      .big-desc { color: var(--accent); font-size: 0.95rem; font-weight: 600; }
+
+      .status-card {
+          width: 100%; max-width: 450px; display: flex; align-items: center; background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--border-color); padding: 15px 25px; border-radius: 16px; transition: 0.3s;
+      }
+      .status-card:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent); transform: translateX(-5px); }
+      .logo-box {
+          width: 50px; height: 50px; background: white; border-radius: 10px; display: flex;
+          align-items: center; justify-content: center; margin-right: 20px; color: #333; font-size: 24px;
+      }
+      .status-text { display: flex; flex-direction: column; }
+      .status-title { color: white; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+      .status-desc { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+
+      /* ==================== 5. PARCOURS ==================== */
+      #parcours.active, #projets.active, #contact.active { align-items: center; }
+      .timeline { position: relative; max-width: 900px; width: 90%; border-left: 3px solid var(--border-color); margin-left: 20px; padding-left: 40px; }
+      .timeline-item { margin-bottom: 50px; position: relative; }
+      .timeline-item::before {
+          content: ''; position: absolute; left: -49px; top: 5px; width: 15px; height: 15px; background: var(--bg-color);
+          border: 3px solid var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent);
+      }
+      .card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: var(--shadow); transition: transform 0.3s; }
+      .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+      .date { color: var(--accent); font-weight: 800; display: block; margin-bottom: 8px; font-size: 0.95rem; }
+      .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+      .card p { color: var(--text-muted); font-size: 1rem; }
+
+      /* ==================== 6. PROJETS ==================== */
+      .project-filter { display: flex; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center; }
+      .filter-btn {
+          background: transparent; border: 1px solid var(--border-color); color: var(--text-muted);
+          padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s;
+      }
+      .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+      .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; width: 85%; max-width: 1100px; }
+      .project-card {
+          background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color);
+          box-shadow: var(--shadow); transition: all 0.3s ease; cursor: pointer; position: relative; display: none;
+      }
+      .project-card.visible { display: block; animation: fadeIn 0.5s; }
+      .project-card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--accent); }
+
+      .click-hint {
+          position: absolute; top: 15px; right: 15px; background: rgba(59, 130, 246, 0.9); color: white;
+          padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; opacity: 0; transition: 0.3s; transform: translateY(-10px);
+      }
+      .project-card:hover .click-hint { opacity: 1; transform: translateY(0); }
+      .p-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid var(--border-color); }
+      .p-info { padding: 25px; }
+      .tags { color: var(--accent); font-weight: 800; font-size: 12px; display: block; margin-bottom: 12px; }
+      .p-info h3 { font-size: 1.4rem; margin-bottom: 10px; color: white; }
+      .p-info p { color: var(--text-muted); }
+
+      /* STYLE ARTICLE PROJET TUTORÉ & PRO */
+      .pt-container {
+          max-width: 900px; width: 90%; display: none; /* Caché par défaut */
+          flex-direction: column; gap: 40px; animation: fadeIn 0.5s; margin: 0 auto;
+      }
+      .pt-card {
+          background: var(--card-bg); padding: 40px; border-radius: 20px;
+          border: 1px solid var(--border-color); box-shadow: var(--shadow);
+      }
+      .pt-title { font-size: 1.5rem; color: white; font-weight: 800; margin-bottom: 20px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; display:inline-block; }
+      .pt-text { color: var(--text-muted); font-size: 1rem; margin-bottom: 20px; text-align: justify; }
+      .pt-subtitle { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-top: 30px; margin-bottom: 10px; }
+      .pt-list { list-style-type: disc; margin-left: 20px; color: var(--text-muted); margin-bottom: 20px; }
+      .pt-list li { margin-bottom: 10px; }
+      .placeholder-large {
+          width: 100%; height: 300px; background: rgba(255,255,255,0.03);
+          border: 2px dashed var(--border-color); border-radius: 15px;
+          display: flex; align-items: center; justify-content: center;
+          color: var(--text-muted); font-style: italic; margin-top: 20px;
+          transition: 0.3s;
+          cursor: pointer;
+      }
+      .placeholder-large:hover { border-color: var(--accent); color: white; }
+
+      .competence { padding: 0.6rem 1.2rem; border-radius: 12px; background: #1f2937; border: 1px solid #374151; display: inline-block; margin: 0.3rem; font-size: 0.9rem; color: #fff; font-weight: 600;}
+
+
+      /* ==================== 7. MODALS & LIGHTBOX ==================== */
+      .modal {
+          display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+          background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center;
+      }
+
+      /* Modal Scrollable */
+      .modal-content {
+          background-color: var(--card-bg); padding: 40px; border-radius: 24px;
+          width: 90%; max-width: 700px; max-height: 90vh; overflow-y: auto;
+          position: relative; border: 1px solid var(--accent); animation: zoomIn 0.3s;
+      }
+
+      .modal-img-container {
+          width: 100%; height: 250px; overflow: hidden; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color);
+          cursor: zoom-in; position: relative; flex-shrink: 0;
+      }
+      .modal-img-display { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+      .modal-img-container:hover .modal-img-display { transform: scale(1.05); }
+
+      .zoom-hint {
+          position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white;
+          padding: 5px 10px; border-radius: 5px; font-size: 10px; pointer-events: none;
+      }
+
+      .lightbox {
+          display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+          background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; cursor: zoom-out;
+      }
+      .lightbox img {
+          max-width: 95%; max-height: 95%; border: 2px solid var(--accent); box-shadow: 0 0 50px rgba(0,0,0,0.5);
+          animation: zoomIn 0.3s;
+      }
+
+      @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+
+      .close-btn {
+          position: absolute; top: 15px; right: 20px; color: var(--text-muted); font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10;
+      }
+      .close-btn:hover { color: white; }
+
+      .competence-block {
+          margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px; border-left: 3px solid var(--accent);
+      }
+      .competence-title { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; display: block; }
+      .code-block {
+          background: #111; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: #d4d4d4;
+          border: 1px solid #333; margin-top: 10px;
+      }
+
+      /* Images dans le texte (CLIQUABLES pour ZOOM) */
+      .content-img {
+          width: 100%; border-radius: 8px; border: 1px solid var(--border-color);
+          margin-top: 10px; cursor: zoom-in; transition: 0.2s;
+      }
+      .content-img:hover { opacity: 0.8; }
+
+      /* Mobile */
+      @media (max-width: 1000px) {
+          .hero-split { flex-direction: column; justify-content: flex-start; padding-top: 100px; min-height: auto; }
+          .hero-left { padding-right: 0; text-align: center; margin-bottom: 40px; }
+          .hero-right { width: 100%; align-items: center; }
+          .profile-photo { margin: 0 auto 20px auto; }
+          .hero-desc { margin: 0 auto 30px auto; text-align: left; }
+          .hero-btns { justify-content: center; }
+          .personal-info-box { justify-content: center; }
+          #home.active { padding: 0 20px; }
+          nav { width: 95%; padding: 10px; gap: 10px; }
+          .nav-link { font-size: 11px; padding: 5px; }
+          .pdf-container { height: 500px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="nav-link active" onclick="showPage('home')">Accueil</a>
+      <a class="nav-link" onclick="showPage('parcours')">Parcours</a>
+      <a class="nav-link" onclick="showPage('projets')">Projets</a>
+      <a class="nav-link" onclick="showPage('contact')">Contact</a>
+    </nav>
+
+    <div id="home" class="page-section active">
+      <div class="hero-split">
+        <div class="hero-left">
+          <img
+            src="https://drive.google.com/thumbnail?id=17KDXfcf_nP9Kq7PTXGJzFPXInahA8Uuq&sz=w1000"
+            class="profile-photo"
+            alt="Ayoub"
+          />
+          <h1>AYOUB CHOKOUD</h1>
+          <div class="subtitle">BUT GEII EN ALTERNANCE</div>
+          <p class="hero-desc">
+            Passionné par l'automatisme et les systèmes embarqués. J'allie
+            rigueur industrielle et innovation pour concevoir les solutions de
+            demain.
+          </p>
+          <div class="personal-info-box">
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i> Montélimar / Montpellier
+            </div>
+            <div class="info-item">
+              <i class="fas fa-car"></i> Permis B - Véhiculé
+            </div>
+            <div class="info-item">
+              <i class="fas fa-phone"></i> 06 41 09 89 69
+            </div>
+          </div>
+          <div class="hero-btns">
+            <a onclick="showPage('projets')" class="btn-action"
+              >DÉCOUVRIR MES PROJETS</a
+            >
+            <a
+              href="https://www.linkedin.com/in/ayoub-chokoud-10b3a2331/"
+              target="_blank"
+              class="btn-linkedin"
+              ><i class="fab fa-linkedin"></i> LINKEDIN</a
+            >
+            <a
+              href="https://drive.google.com/uc?export=download&id=1Nty0yrsWQQsPukeMI_Jv5cS_67FhFm1O"
+              class="btn-secondary"
+              ><i class="fas fa-download"></i> TÉLÉCHARGER CV</a
+            >
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="big-status-card">
+            <div class="big-img-box">
+              <img
+                src="https://drive.google.com/thumbnail?id=1hje0XGLatpk01rD-y7JpqS7ga3OWdH6s&sz=w1000"
+                alt="EDF"
+              />
+            </div>
+            <div class="big-text-box">
+              <span class="big-title">Alternant Technicien en Automatisme</span>
+              <span class="big-desc">CNPE EDF Cruas</span>
+            </div>
+          </div>
+          <div class="status-card">
+            <div class="logo-box">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="status-text">
+              <span class="status-title">3ème Année BUT GEII</span>
+              <span class="status-desc">IUT de Montpellier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-section">
+        <h3
+          style="color: white; margin-bottom: 20px; font-weight: 800; letter-spacing: 2px;"
+        >
+          RÉFÉRENTIEL DE COMPÉTENCES GEII
+        </h3>
+        <div class="pdf-container">
+          <iframe
+            src="https://drive.google.com/file/d/1K-NaO8KndCke3-7V0JD0eB2NLll28oRa/preview"
+            class="pdf-frame"
+            allow="autoplay"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div id="parcours" class="page-section">
+      <h2 style="margin-bottom: 50px; font-size: 2.5rem; text-align:center;">
+        Parcours Scolaire
+      </h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="date">2024 - PRÉSENT</span>
+          <div class="card">
+            <h3>BUT GEII (Montpellier)</h3>
+            <p>
+              Alternance EDF Cruas. Spécialisation Automatisme & Informatique
+              Industrielle (AII).
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="date">2023 - 2024</span>
+          <div class="card">
+            <h3>BUT 1 GEII (Saint-Étienne)</h3>
+            <p>
+              Formation Initiale. Bases de l'électronique, programmation C++ et
+              gestion d'énergie.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="date">2023</span>
+          <div class="card">
+            <h3>Baccalauréat Général</h3>
+            <p>
+              Lycée Alain Borne. Spécialités Mathématiques & Physique-Chimie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="projets" class="page-section">
+      <h2 style="margin-bottom: 30px; font-size: 2.5rem; text-align:center;">
+        Mes Réalisations
+      </h2>
+
+      <div class="project-filter">
+        <button class="filter-btn active" onclick="filterProjects('1')">
+          1ère Année
+        </button>
+        <button class="filter-btn" onclick="filterProjects('2')">
+          3ème Année (Alternance)
+        </button>
+        <button class="filter-btn" onclick="filterProjects('tutore')">
+          Projet Tutoré (EDF)
+        </button>
+        <button class="filter-btn" onclick="filterProjects('pro')">
+          Projet Pro EDF 2ème Année
+        </button>
+        <button class="filter-btn" onclick="filterProjects('pro3')">
+          Projet Pro 3ème Année
+        </button>
+      </div>
+
+      <div class="project-grid" style="margin: 0 auto;">
+        <div
+          class="project-card visible"
+          data-year="2"
+          onclick="openModal('sae_malaxeur', 'https://drive.google.com/thumbnail?id=1ps-0_uM1uvv8HXMaRiM_NKZY72fua7nc&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=1ps-0_uM1uvv8HXMaRiM_NKZY72fua7nc&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">AUTOMATE • GEMMA • IHM</span>
+            <h3>Automatisation Malaxeur Habilis</h3>
+            <p>
+              Programmation d'un cycle de malaxage, gestion des sécurités et
+              IHM.
+            </p>
+          </div>
+          <div id="data-sae_malaxeur" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Projet de 2ème année (SAÉ) réalisé en binôme. L'objectif était
+              d'automatiser entièrement un malaxeur industriel (Malaxeur
+              Habilis), en intégrant la gestion des modes de marche, la
+              sécurité, et une interface opérateur complète.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title"
+                >CONCEVOIR (AC21.01) - ANALYSE & GEMMA</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Élaboration du <b>GEMMA</b> pour définir les modes de marche,
+                  d'arrêt (A1, A6, F1) et les procédures en défaillance (Arrêt
+                  d'urgence D1).
+                </li>
+                <li>
+                  Structuration du programme en différents Grafcets : Cycle
+                  normal, Sécurité (AU) et Chien de garde (Watchdog).
+                </li>
+                <li>
+                  Définition de la table d'allocation des variables automates
+                  (Entrées/Sorties physiques et Mots IHM).
+                </li>
+              </ul>
+            </div>
+            <div class="competence-block">
+              <span class="competence-title"
+                >INTÉGRER (AC24.02) - PROGRAMMATION & IHM</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Programmation mixte <b>Grafcet / Ladder</b> des 6 phases du
+                  procédé (chargement, chauffe, malaxage, décélération,
+                  positionnement fin).
+                </li>
+                <li>
+                  Développement de l'<b>IHM</b> : écrans de supervision, gestion
+                  de recettes, et affichage dynamique des courbes de température
+                  et de vitesse.
+                </li>
+              </ul>
+            </div>
+            <div class="competence-block">
+              <span class="competence-title"
+                >VÉRIFIER (AC22.02) - VALIDATION</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Rédaction d'une procédure de test détaillée.</li>
+                <li>
+                  Validation des sécurités (ouverture carter, bridage des
+                  saisies opérateur).
+                </li>
+                <li>
+                  Simulation et vérification du bon déroulement des phases
+                  thermiques et mécaniques du cycle.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card visible"
+          data-year="2"
+          onclick="openModal('sae_can', 'https://drive.google.com/thumbnail?id=11VDOEvMo-EwrpEYaLDjUflCQlJEagBk7&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=11VDOEvMo-EwrpEYaLDjUflCQlJEagBk7&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">KICAD • CAN BUS • NUCLEO</span>
+            <h3>Carte Commande Moteur CAN</h3>
+            <p>
+              Conception et fabrication d'un shield de commande moteur piloté
+              par Bus CAN.
+            </p>
+          </div>
+          <div id="data-sae_can" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Conception intégrale d'une carte électronique type "Shield" pour
+              microcontrôleur Nucleo, dédiée au pilotage de puissance d'un
+              moteur DC via le protocole Bus CAN. Ce projet couvre toute la
+              chaîne : du routage sur Kicad à la validation par tests
+              instrumentés.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title"
+                >CONCEVOIR (AC21.01/AC21.02) - HARDWARE</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Dimensionnement et intégration du driver moteur
+                  <b>DRV8251</b> (Pont en H).
+                </li>
+                <li>
+                  Routage complexe sous <b>Kicad</b> : Gestion des pistes de
+                  puissance (3A) et des plans de masse.
+                </li>
+                <li>
+                  Ajout de protections électriques : Inversion de polarité
+                  (MOSFET SI2302) et limitation de courant.
+                </li>
+              </ul>
+              <img
+                src="https://drive.google.com/thumbnail?id=1kPtdPOpDAi5m4l97bp9MwnCDVoj74WF4&sz=w1000"
+                class="content-img"
+                onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+                alt="Schéma électrique Kicad"
+              />
+            </div>
+            <div class="competence-block">
+              <span class="competence-title"
+                >VÉRIFIER (AC22.02) - FABRICATION & TESTS</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Fabrication et soudure des composants CMS et traversants.
+                </li>
+                <li>
+                  Rédaction d'une procédure de test complète (Continuité
+                  Vmot/GND, 3.3V/GND).
+                </li>
+                <li>
+                  Validation des alimentations stabilisées avant connexion à la
+                  Nucleo.
+                </li>
+              </ul>
+              <img
+                src="https://drive.google.com/thumbnail?id=1nwznRPqMcPbhifCTxZdDEnDumXmJqnQN&sz=w1000"
+                class="content-img"
+                onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+                alt="Photo de la carte réalisée"
+              />
+            </div>
+            <div class="competence-block">
+              <span class="competence-title">INTÉGRER (AC24.02) - SYSTÈME</span>
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Communication établie entre la carte et un logiciel d'analyse
+                  (<b>CanHacker</b>).
+                </li>
+                <li>
+                  Pilotage effectif du moteur (sens, vitesse, arrêt) via des
+                  trames CAN standard.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card visible"
+          data-year="2"
+          onclick="openModal('edf', 'https://drive.google.com/thumbnail?id=1hje0XGLatpk01rD-y7JpqS7ga3OWdH6s&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=1hje0XGLatpk01rD-y7JpqS7ga3OWdH6s&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">EDF • MAINTENANCE • NUCLÉAIRE</span>
+            <h3>Missions CNPE Cruas</h3>
+            <p>
+              Maintenance préventive et corrective sur systèmes automatisés
+              critiques.
+            </p>
+          </div>
+          <div id="data-edf" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Travaux réalisés dans le cadre de l'alternance au sein du Service
+              Automatisme & Électricité (SAE) du CNPE.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title"
+                >MAINTENIR (AC23.01) - INTERVENTIONS SUR SITE</span
+              >
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Diagnostic, étalonnage et remplacement d'équipements de
+                  régulation de processus.
+                </li>
+                <li>
+                  Intervention sur les boucles de régulation et les capteurs
+                  (pression, température, niveau) en zone contrôlée.
+                </li>
+                <li>
+                  Analyse de schémas électriques et mise à jour documentaire
+                  (KKS).
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card"
+          data-year="1"
+          onclick="openModal('robot', 'https://drive.google.com/thumbnail?id=14SeuUBU6pP--oZLrBsetFElUURY2GKv1&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=14SeuUBU6pP--oZLrBsetFElUURY2GKv1&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">ARDUINO • ÉLECTRONIQUE</span>
+            <h3>Robot Suiveur de Ligne</h3>
+            <p>Conception d'un robot autonome avec suivi de trajectoire.</p>
+          </div>
+          <div id="data-robot" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Ce projet visait à concevoir un robot mobile autonome capable de
+              parcourir un circuit balisé par une ligne noire.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.02)</span>
+              Réalisation prototype :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Conception carte commande moteur (Pont en H).</li>
+                <li>Programmation du microcontrôleur Arduino.</li>
+              </ul>
+            </div>
+            <div class="competence-block">
+              <span class="competence-title">VÉRIFIER (AC12.01)</span>
+              Protocole de tests :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Essais capteurs infrarouges (Calibrage).</li>
+                <li>Correction de la trajectoire (Asservissement).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card"
+          data-year="1"
+          onclick="openModal('sae_auto', 'https://drive.google.com/thumbnail?id=1CkbSmWg20u4FogYQyRYacdtn8uQwNt1L&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=1CkbSmWg20u4FogYQyRYacdtn8uQwNt1L&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">GRAFCET • TIA PORTAL • IHM</span>
+            <h3>Pilotage Automate Ascenseur</h3>
+            <p>
+              Programmation d'un automate pour la gestion complète d'un
+              ascenseur.
+            </p>
+          </div>
+          <div id="data-sae_auto" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Réalisation de la commande d'un ascenseur 4 étages via un automate
+              programmable. Le projet inclut la gestion des modes de marche
+              (Automatique, Manuel, Sécurité) et l'interface homme-machine.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.01)</span>
+              Structure du GRAFCET :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Gestion des priorités d'appels et des étages.</li>
+                <li>
+                  Séquences d'ouverture/fermeture des portes avec sécurités.
+                </li>
+              </ul>
+              <img
+                src="https://drive.google.com/thumbnail?id=1yLABk_Tfx3d9ciXCQ7LA1sWX5qRs6_3y&sz=w1000"
+                class="content-img"
+                onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+              />
+            </div>
+            <div class="competence-block">
+              <span class="competence-title">INTÉGRER (AC24.02)</span>
+              Mise en œuvre Réseau & IHM :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Programmation Ladder sous Siemens TIA Portal.</li>
+                <li>Communication Modbus avec écran tactile HMI Magelis.</li>
+              </ul>
+              <img
+                src="https://drive.google.com/thumbnail?id=1EY20TvZCbyhjdC7aS0KJ75N0XrwJCVtA&sz=w1000"
+                class="content-img"
+                onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card"
+          data-year="1"
+          onclick="openModal('audio', 'https://drive.google.com/thumbnail?id=1mhWuqzXAQJ0aiBgP0EyXOphIIF4pUJzE&sz=w1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://drive.google.com/thumbnail?id=1mhWuqzXAQJ0aiBgP0EyXOphIIF4pUJzE&sz=w1000"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">PROTEUS • AUDACITY</span>
+            <h3>Filtre Audio Analogique</h3>
+            <p>Simulation et analyse d'un amplificateur audio LM386.</p>
+          </div>
+          <div id="data-audio" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Étude complète d'une chaîne d'acquisition et de traitement audio.
+              Simulation du composant LM386 sous Proteus.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.02)</span>
+              Prototypage Virtuel :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Réalisation du schéma structurel sous Proteus.</li>
+                <li>
+                  Choix des composants pour le filtrage (Passe-bas /
+                  Passe-bande).
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card visible"
+          data-year="1"
+          onclick="openModal('elevator', 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">C++ • PHYSIQUE • MÉCANIQUE</span>
+            <h3>Dimensionnement Ascenseur</h3>
+            <p>
+              Programme de calcul C++ pour le dimensionnement d'un système
+              d'élévation.
+            </p>
+          </div>
+          <div id="data-elevator" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Développement d'un outil de calcul en langage C++ pour le
+              dimensionnement mécanique d'un système d'ascenseur (Cabine +
+              Contrepoids). Le programme permet à un utilisateur de déterminer
+              les couples moteurs, les masses nécessaires ou l'accélération via
+              une interface console interactive.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.01)</span>
+              Analyse Fonctionnelle :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Traduction des équations physiques (PFD en rotation) en
+                  algorithmes informatiques.
+                </li>
+                <li>
+                  Calcul de l'équilibre dynamique (Cabine/Contrepoids) via des
+                  formules mathématiques implémentées.
+                </li>
+              </ul>
+            </div>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.02)</span>
+              Implémentation Logicielle :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>
+                  Développement modulaire (fichiers header .h et source .cpp).
+                </li>
+                <li>
+                  Utilisation de structures de contrôle (Switch/Case) pour
+                  l'interface utilisateur.
+                </li>
+              </ul>
+              <div class="code-block">
+                // Exemple de fonction codée :<br />
+                double calculerCouple(double M, double m, double a, double R)
+                {<br />
+                &nbsp;&nbsp;return (I * (a / R)) - R * (m * (G - a) - M * (a +
+                G));<br />
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="project-card"
+          data-year="1"
+          onclick="openModal('ener', 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1000')"
+        >
+          <div class="click-hint"><i class="fas fa-plus"></i> Détails</div>
+          <img
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600"
+            class="p-img"
+          />
+          <div class="p-info">
+            <span class="tags">ÉNERGIE • DURABLE</span>
+            <h3>Rénovation Éclairage IUT</h3>
+            <p>Étude technico-économique pour le passage en LED.</p>
+          </div>
+          <div id="data-ener" style="display:none;">
+            <p style="margin-bottom: 20px;">
+              Audit énergétique de l'éclairage existant et proposition de
+              remplacement.
+            </p>
+            <div class="competence-block">
+              <span class="competence-title">CONCEVOIR (AC11.03)</span>
+              Étude Technico-Économique :
+              <ul style="margin-left:20px; margin-top:5px;">
+                <li>Bilan de puissance active et réactive.</li>
+                <li>Calcul du retour sur investissement (ROI).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-container" id="pt-content">
+        <div class="pt-card">
+          <span class="pt-title"
+            >Contexte Industriel : EDF / CNPE Cruas-Meysse</span
+          >
+          <p class="pt-text">
+            Ce projet, réalisé en collaboration avec le service
+            <b>SAE (Service Automatisme Électricité)</b> de la centrale
+            nucléaire de Cruas, porte sur l'étude approfondie des technologies
+            de mesure de niveau utilisées dans les processus critiques (circuit
+            primaire et secondaire). L'objectif est d'analyser les solutions
+            existantes pour garantir la sûreté des installations.
+          </p>
+          <div class="pt-subtitle">Technologies Analysées</div>
+          <ul class="pt-list">
+            <li>Capteurs Radar et Ultrasons (Mesure sans contact).</li>
+            <li>Capteurs à Pression Différentielle (Rosemount).</li>
+            <li>
+              <b>Focus Principal :</b> Le Capteur à Plongeur (Technologie
+              Masoneilan).
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title"
+            >Analyse Technique : Le Capteur à Plongeur</span
+          >
+          <p class="pt-text">
+            Le fonctionnement de ce capteur repose sur le
+            <b>Principe d'Archimède</b>. Un plongeur cylindrique est immergé
+            dans le liquide. Son poids apparent varie en fonction du niveau
+            d'immersion. Cette variation de force est transmise mécaniquement
+            via un <b>Bras de Torsion</b> et un <b>Tube de Torsion</b> étanche.
+          </p>
+          <div class="pt-subtitle">Mécanisme du Tube de Torsion</div>
+          <p class="pt-text">
+            C'est l'élément clé du système. Il permet de transmettre le
+            mouvement du plongeur (situé dans la zone sous pression) vers le
+            mécanisme électronique (situé à l'extérieur) sans aucun joint
+            dynamique, garantissant une étanchéité parfaite. La torsion du tube
+            est proportionnelle à la poussée d'Archimède, donc au niveau.
+          </p>
+          <img
+            src="https://drive.google.com/thumbnail?id=1gDFjjIPK8G_SRzigSnjg_qwlrUeOKECH&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Schéma Tube de Torsion / Plongeur"
+          />
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Maintenance & Requalification</span>
+          <p class="pt-text">
+            La maintenance de ces capteurs est critique. Le projet a permis de
+            détailler la procédure complète d'intervention :
+          </p>
+          <ul class="pt-list">
+            <li>
+              <b>Préparation :</b> Analyse de risques, Dossier de Réalisation de
+              Travaux (DRT), Logistique pièces de rechange.
+            </li>
+            <li>
+              <b>Calibration sur Banc :</b> Vérification du point zéro et de
+              l'échelle en utilisant des poids étalons pour simuler la poussée.
+            </li>
+            <li>
+              <b>Vérification des Seuils :</b> Contrôle précis des "Cotes de
+              Basculement" (Seuil critique relevé à <b>53 mm</b> lors de nos
+              essais).
+            </li>
+          </ul>
+          <img
+            src="https://drive.google.com/thumbnail?id=1DJ957PWoX3ogCftDHv5Cb_98rGmVVMKj&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Banc de Test / Calibration"
+          />
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Remise en Service</span>
+          <p class="pt-text">
+            Une fois le capteur réinstallé sur tranche, une
+            <b>Requalification Intrinsèque</b> est obligatoire. Nous procédons
+            au remplissage réel de la chambre (bâche) avec de l'eau
+            déminéralisée pour valider le déclenchement physique des alarmes de
+            niveau (Test "Grandeur Nature").
+          </p>
+          <img
+            src="https://drive.google.com/thumbnail?id=15jJk0SSXadgi5o31fP7YdFjgUN_Benh_&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Installation sur Site / Bâche"
+          />
+        </div>
+
+        <div class="pt-card" style="border-color: var(--accent);">
+          <span class="pt-title" style="border-bottom-color: white;"
+            >Compétences GEII Mobilisées</span
+          >
+          <p class="pt-text">
+            L'étude et la maintenance de cette instrumentation nucléaire m'ont
+            permis de valider les compétences suivantes :
+          </p>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-search"></i> ANALYSER & CONCEVOIR</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Compréhension approfondie d'une boucle de mesure physique (Poussée
+              d'Archimède) et de la transmission mécanique étanche via le tube
+              de torsion.
+            </p>
+          </div>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-check-circle"></i> VÉRIFIER (AC22.02)</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Mise en œuvre d'un protocole de métrologie sur banc d'essai :
+              étalonnage du capteur à l'aide de poids simulés et validation
+              rigoureuse des côtes de basculement (53 mm).
+            </p>
+          </div>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-wrench"></i> MAINTENIR (AC23.01)</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Préparation d'intervention (Analyse de risques, Dossier de
+              Réalisation de Travaux) et requalification fonctionnelle sur
+              tranche avec une bâche en eau réelle pour le déclenchement des
+              alarmes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-container" id="pp-content">
+        <div style="margin-bottom: 20px; text-align: center;">
+          <span class="competence">🔌 Intégrer</span>
+          <span class="competence">✅ Vérifier</span>
+          <span class="competence">🔧 Maintenir</span>
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Contexte : Le Positionneur Numérique</span>
+          <p class="pt-text">
+            Projet de fin d'année réalisé au sein du Service Automatisme et
+            Instrumentation du CNPE de Cruas-Meysse. L'objectif global était la
+            mise en place, la configuration et le diagnostic d'un positionneur
+            numérique de haute précision <b>(FieldVue DVC6200 de Fisher)</b> sur
+            des vannes de régulation pneumatiques critiques.
+          </p>
+          <div class="pt-subtitle">Enjeux sur site</div>
+          <ul class="pt-list">
+            <li>
+              Améliorer la précision de la régulation de débit/pression dans le
+              process.
+            </li>
+            <li>
+              Passer d'une technologie analogique à un positionneur intelligent
+              (microprocesseur intégré).
+            </li>
+            <li>
+              Permettre un diagnostic prédictif de l'état de la vanne sans
+              arrêter la production.
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Intégration Matérielle et Acquisition</span>
+          <p class="pt-text">
+            La première étape consiste à installer physiquement le positionneur
+            sur l'actionneur de la vanne (type actionneur Fisher 657 ou
+            Turbopompe ASG).
+          </p>
+          <ul class="pt-list">
+            <li>
+              Montage de la platine et accouplement mécanique (capteur à effet
+              Hall sans contact).
+            </li>
+            <li>Raccordement pneumatique (alimentation en air instrument).</li>
+            <li>Branchement de la boucle de courant 4-20mA.</li>
+            <li>
+              Mise en place de la <b>valise de mesure</b> sur le terrain pour
+              l'acquisition et la communication avec l'appareil.
+            </li>
+          </ul>
+          <img
+            src="https://drive.google.com/thumbnail?id=1DyTTfsiV2yFll90fG74ZjJ18lTw_JJ18&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Montage / Valise de mesure"
+          />
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Configuration & Calibration</span>
+          <p class="pt-text">
+            Une fois le matériel raccordé, l'appareil doit être paramétré pour
+            correspondre exactement à la vanne sur laquelle il est monté.
+          </p>
+          <ul class="pt-list">
+            <li>
+              Configuration logicielle : Spécification des tailles d'actionneur,
+              type de relais, signal de commande.
+            </li>
+            <li>
+              <b>Auto-Calibration :</b> Étalonnage automatique des capteurs de
+              position et de pression internes pour obtenir un asservissement
+              optimal.
+            </li>
+            <li>
+              Ajustement des gains de régulation (Proportionnel, Intégral,
+              Dérivé).
+            </li>
+          </ul>
+          <img
+            src="https://drive.google.com/thumbnail?id=1jHn6tRf-MwF4zYuWmFYdpe1Ohi6aUtOH&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Interface de Calibration / Courbe"
+          />
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title"
+            >Diagnostic Avancé : La Signature de Vanne</span
+          >
+          <p class="pt-text">
+            Le véritable atout du positionneur numérique est sa capacité à
+            diagnostiquer "l'état de santé" de la mécanique de la vanne.
+          </p>
+          <div class="pt-subtitle">Signature et Bande d'erreur</div>
+          <ul class="pt-list">
+            <li>
+              <b>Signature de Vanne :</b> Tracé de la course de la vanne en
+              fonction du signal de commande. Permet de détecter les frottements
+              excessifs (hystérésis) ou les problèmes de ressort.
+            </li>
+            <li>
+              <b>Bande d'Erreur Dynamique :</b> Mesure de l'écart entre la
+              consigne demandée et la position réelle atteinte en mouvement.
+              Essentiel pour certifier la précision de la régulation dans le
+              process nucléaire.
+            </li>
+          </ul>
+          <img
+            src="https://drive.google.com/thumbnail?id=1NbOsgwkqUh7Dpt4NIPAKj9m6XssqiigF&sz=w1000"
+            class="content-img"
+            onclick="openLightboxWithImage(this.src); event.stopPropagation();"
+            alt="Graphique de Signature de Vanne"
+          />
+        </div>
+
+        <div class="pt-card" style="border-color: var(--accent);">
+          <span class="pt-title" style="border-bottom-color: white;"
+            >Compétences GEII Mobilisées</span
+          >
+          <p class="pt-text">
+            Ce projet m'a permis d'appliquer directement les compétences
+            fondamentales de mon cursus (Parcours AII) sur le terrain industriel
+            :
+          </p>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-plug"></i> INTÉGRER (AC24.02)</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Installation matérielle du positionneur sur l'actionneur (montage
+              de la platine, accouplement magnétique) et raccordement
+              pneumatique et électrique (boucle 4-20mA).
+            </p>
+          </div>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-check-circle"></i> VÉRIFIER (AC22.02)</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Utilisation d'une valise de mesure pour la configuration
+              logicielle, l'auto-calibration des capteurs et la réalisation de
+              la signature de vanne certifiant son bon fonctionnement.
+            </p>
+          </div>
+
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-wrench"></i> MAINTENIR (AC23.01)</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              Mise en œuvre d'un diagnostic prédictif (analyse de la bande
+              d'erreur dynamique et des frottements) permettant d'anticiper les
+              défaillances sans arrêter la production sur tranche.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PROJET PRO 3ème ANNÉE (à compléter) ===== -->
+      <div class="pt-container" id="pp3-content">
+        <div style="margin-bottom: 20px; text-align: center;">
+          <span class="competence">🔌 Intégrer</span>
+          <span class="competence">✅ Vérifier</span>
+          <span class="competence">🔧 Maintenir</span>
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Contexte du Projet</span>
+          <p class="pt-text">
+            Projet professionnel de 3ème année réalisé en alternance au sein du
+            CNPE EDF de Cruas-Meysse. [Décris ici le contexte et l'objectif du
+            projet.]
+          </p>
+          <div class="pt-subtitle">Enjeux sur site</div>
+          <ul class="pt-list">
+            <li>[Enjeu 1]</li>
+            <li>[Enjeu 2]</li>
+            <li>[Enjeu 3]</li>
+          </ul>
+        </div>
+
+        <div class="pt-card">
+          <span class="pt-title">Réalisation Technique</span>
+          <p class="pt-text">[Décris les étapes et le travail réalisé.]</p>
+          <div class="placeholder-large">Image à ajouter</div>
+        </div>
+
+        <div class="pt-card" style="border-color: var(--accent);">
+          <span class="pt-title" style="border-bottom-color: white;"
+            >Compétences GEII Mobilisées</span
+          >
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-plug"></i> INTÉGRER</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              [À compléter]
+            </p>
+          </div>
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-check-circle"></i> VÉRIFIER</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              [À compléter]
+            </p>
+          </div>
+          <div class="competence-block">
+            <span class="competence-title"
+              ><i class="fas fa-wrench"></i> MAINTENIR</span
+            >
+            <p style="color: #ccc; font-size: 0.95rem; margin-top: 5px;">
+              [À compléter]
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title" style="color:white; margin-bottom:15px;">Titre</h2>
+        <div class="modal-img-container" onclick="openLightbox()">
+          <img id="modal-img" src="" class="modal-img-display" />
+          <div class="zoom-hint">
+            <i class="fas fa-search-plus"></i> Cliquez pour agrandir
+          </div>
+        </div>
+        <div
+          id="modal-desc"
+          class="modal-details"
+          style="border:none; margin:0; padding:0;"
+        ></div>
+      </div>
+    </div>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <img id="lightbox-img" src="" />
+    </div>
+
+    <div id="contact" class="page-section">
+      <h2 style="margin-bottom: 30px; font-size: 2.5rem; text-align:center;">
+        Me Contacter
+      </h2>
+      <div
+        class="card"
+        style="text-align:center; padding:50px; max-width:600px; margin:0 auto;"
+      >
+        <p
+          style="margin-bottom:30px; font-size: 1.1rem; color:var(--text-main);"
+        >
+          N'hésitez pas à me contacter par email ou via LinkedIn.
+        </p>
+        <div style="font-size: 1.2rem; color: white; margin-bottom: 20px;">
+          <i
+            class="fas fa-envelope"
+            style="color:var(--accent); margin-right:10px;"
+          ></i>
+          chokoudayoub1@gmail.com
+        </div>
+        <a href="mailto:chokoudayoub1@gmail.com" class="btn-action"
+          >M'ÉCRIRE DIRECTEMENT</a
+        >
+      </div>
+    </div>
+
+    <script>
+      function showPage(pageId) {
+          document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          document.getElementById(pageId).classList.add('active');
+          document.querySelectorAll('.nav-link').forEach(l => {
+              if(l.getAttribute('onclick').includes(pageId)) l.classList.add('active');
+          });
+          window.scrollTo(0, 0); // Remonter en haut de page
+      }
+
+      // Système de Filtre avec gestion des Articles (Projet Tutoré & Projet Pro)
+      function filterProjects(category) {
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          event.target.classList.add('active');
+
+          const grid = document.querySelector('.project-grid');
+          const cards = document.querySelectorAll('.project-card');
+          const articles = { tutore: 'pt-content', pro: 'pp-content', pro3: 'pp3-content' };
+
+          // Cache tous les articles
+          Object.values(articles).forEach(id => document.getElementById(id).style.display = 'none');
+
+          if (articles[category]) {
+              grid.style.display = 'none';
+              document.getElementById(articles[category]).style.display = 'flex';
+          } else {
+              grid.style.display = 'grid';
+
+              cards.forEach(card => {
+                  if(card.getAttribute('data-year') === category) {
+                      card.classList.add('visible');
+                      card.style.display = 'block';
+                  } else {
+                      card.classList.remove('visible');
+                      card.style.display = 'none';
+                  }
+              });
+          }
+      }
+
+      let currentImageSrc = "";
+      function openModal(projectId, imgSrc) {
+          const title = document.getElementById('modal-title');
+          const desc = document.getElementById('modal-desc');
+          const dataDiv = document.getElementById('data-' + projectId);
+          const imgDisplay = document.getElementById('modal-img');
+
+          if (projectId === 'robot') title.innerText = "Robot Suiveur de Ligne";
+          else if (projectId === 'audio') title.innerText = "Filtre Audio Analogique";
+          else if (projectId === 'elevator') title.innerText = "Dimensionnement Ascenseur";
+          else if (projectId === 'sae_auto') title.innerText = "Pilotage Automate Ascenseur";
+          else if (projectId === 'sae_can') title.innerText = "Carte Commande Moteur CAN";
+          else if (projectId === 'ener') title.innerText = "Rénovation Éclairage";
+          else if (projectId === 'edf') title.innerText = "Missions Alternance EDF";
+          else if (projectId === 'sae_malaxeur') title.innerText = "Automatisation Malaxeur Habilis";
+
+          desc.innerHTML = dataDiv.innerHTML;
+          imgDisplay.src = imgSrc;
+          currentImageSrc = imgSrc;
+          document.getElementById('project-modal').style.display = "flex";
+      }
+      function closeModal() { document.getElementById('project-modal').style.display = "none"; }
+
+      function openLightbox() {
+          document.getElementById('lightbox-img').src = currentImageSrc;
+          document.getElementById('lightbox').style.display = "flex";
+      }
+
+      function openLightboxWithImage(src) {
+          document.getElementById('lightbox-img').src = src;
+          document.getElementById('lightbox').style.display = "flex";
+      }
+
+      function closeLightbox() { document.getElementById('lightbox').style.display = "none"; }
+      window.onclick = function(event) { if (event.target == document.getElementById('project-modal')) closeModal(); }
+
+      // Initialiser la vue 1ère année par défaut
+      window.onload = function() {
+          const btn1 = document.querySelector('.filter-btn');
+          if(btn1) {
+             btn1.click();
+          }
+      }
+    </script>
+  </body>
+</html>
